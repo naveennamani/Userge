@@ -4,7 +4,8 @@ bs4
 covid
 cowpy
 dnspython
-emoji
+emoji==0.6.0
+feedparser
 gitpython
 google-api-python-client
 google-auth-httplib2
@@ -17,10 +18,10 @@ instaloader
 motor
 natsort
 oauth2client
-Pillow==8.0
+Pillow==8.0.1
 psutil
 pybase64
-pyrogram==1.1.10
+pyrogram==1.1.13
 pySmartDL
 python-dotenv
 pytz
