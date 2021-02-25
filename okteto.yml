@@ -9,3 +9,6 @@ push:
   context: .
   dockerfile: Dockerfile
   target: prod
+
+sync:
+  - .:/code
