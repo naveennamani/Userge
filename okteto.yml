@@ -1,3 +1,5 @@
+name: userge-nn
+
 persistentVolume:
   enabled: true
   storageClass: standard
