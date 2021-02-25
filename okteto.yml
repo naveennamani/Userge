@@ -1,0 +1,9 @@
+persistentVolume:
+  enabled: true
+  storageClass: standard
+  size: 3Gi
+
+push:
+  context: .
+  dockerfile: Dockerfile
+  target: prod
