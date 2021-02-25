@@ -11,3 +11,8 @@ push:
 
 sync:
   - .:/app
+
+environment:
+  - API_ID
+  - API_HASH
+  - LOG_CHANNEL_ID
