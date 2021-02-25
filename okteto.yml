@@ -10,4 +10,4 @@ push:
   dockerfile: Dockerfile
 
 sync:
-  - .:.
+  - .:/app
