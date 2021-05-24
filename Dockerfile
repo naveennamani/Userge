@@ -1,13 +1,17 @@
 # set base image (host OS)
-FROM python:3.9
+FROM python:3.9-slim-buster
 
 # set the working directory in the container
 WORKDIR /app/
 
-RUN apt -qq update
+RUN echo deb http://http.us.debian.org/debian/ testing non-free contrib main > /etc/apt/sources.list && \
+    apt -qq update
 RUN apt -qq install -y --no-install-recommends \
     curl \
     git \
+    gcc \
+    g++ \
+    build-essential \
     gnupg2 \
     unzip \
     wget \
@@ -33,6 +37,16 @@ RUN mkdir -p /tmp/ && \
 
 ENV GOOGLE_CHROME_DRIVER /usr/bin/chromedriver
 ENV GOOGLE_CHROME_BIN /usr/bin/google-chrome-stable
+
+# install rar
+RUN mkdir -p /tmp/ && \
+    cd /tmp/ && \
+    wget -O /tmp/rarlinux.tar.gz http://www.rarlab.com/rar/rarlinux-x64-6.0.0.tar.gz && \
+    tar -xzvf rarlinux.tar.gz && \
+    cd rar && \
+    cp -v rar unrar /usr/bin/ && \
+    # clean up
+    rm -rf /tmp/rar*
 
 # copy the dependencies file to the working directory
 COPY requirements.txt .

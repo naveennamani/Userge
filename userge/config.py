@@ -44,8 +44,6 @@ class Config:
     UNFINISHED_PROGRESS_STR = os.environ.get("UNFINISHED_PROGRESS_STR")
     ALIVE_MEDIA = os.environ.get("ALIVE_MEDIA")
     CUSTOM_PACK_NAME = os.environ.get("CUSTOM_PACK_NAME")
-    INSTA_ID = os.environ.get("INSTA_ID")
-    INSTA_PASS = os.environ.get("INSTA_PASS")
     UPSTREAM_REPO = os.environ.get("UPSTREAM_REPO")
     UPSTREAM_REMOTE = os.environ.get("UPSTREAM_REMOTE")
     SPAM_WATCH_API = os.environ.get("SPAM_WATCH_API")
@@ -55,6 +53,7 @@ class Config:
     REMOVE_BG_API_KEY = os.environ.get("REMOVE_BG_API_KEY")
     WEATHER_DEFCITY = os.environ.get("WEATHER_DEFCITY")
     TZ_NUMBER = os.environ.get("TZ_NUMBER", 1)
+    MAX_DURATION = int(os.environ.get("MAX_DURATION", 900))
     G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID")
     G_DRIVE_CLIENT_SECRET = os.environ.get("G_DRIVE_CLIENT_SECRET")
     G_DRIVE_PARENT_ID = os.environ.get("G_DRIVE_PARENT_ID")
@@ -94,10 +93,10 @@ def get_version() -> str:
     if "/usergeteam/userge" in Config.UPSTREAM_REPO.lower():
         diff = list(_REPO.iter_commits(f'v{ver}..HEAD'))
         if diff:
-            return f"{ver}-patch.{len(diff)}"
+            ver = f"{ver}-patch.{len(diff)}"
     else:
         diff = list(_REPO.iter_commits(
             f'{Config.UPSTREAM_REMOTE}/master..HEAD'))
         if diff:
-            return f"{ver}-custom.{len(diff)}"
-    return ver
+            ver = f"{ver}-custom.{len(diff)}"
+    return ver + '@' + _REPO.active_branch.name
